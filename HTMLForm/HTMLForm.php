@@ -57,24 +57,46 @@ class HTMLForm
 			switch ($f['type']){
 				case 'text':
 				case 'file':
-					$r .= sprintf('<label>%s</label>', $f['label']);
-					$r .= $this->renderInput($f['type'], $f['name'], $f['value'], $f['attrs']);
+				case 'password':
+					$r .= sprintf('<p><label>%s%s</label></p>',
+						$f['label'],
+						$this->renderInput($f['type'], $f['name'], $f['value'], $f['attrs'])
+					);
 					break;
 				case 'textarea':
-					$r .= sprintf('<label>%s</label>', $f['label']);
-					$r .= $this->renderTextArea($f['name'], $f['value'], $f['attrs']);
+					$r .= sprintf('<p><label>%s%s</label></p>',
+						$f['label'],
+						$this->renderTextArea($f['name'], $f['value'], $f['attrs'])
+					);
 					break;
 				case 'select':
-					$r .= sprintf('<label>%s</label>', $f['label']);
-					$r .= $this->renderSelect($f['name'], $f['value'], $f['attrs']);
+					$r .= sprintf('<p><label>%s%s</label></p>',
+						$f['label'],
+						$this->renderSelect($f['name'], $f['value'], $f['attrs'])
+					);
+					break;
+				case 'radio':
+					$r .= sprintf('<fieldset><legend>%s</legend>%s</fieldset>',
+						$f['label'],
+						$this->renderRadio($f['name'], $f['value'], $f['attrs'])
+					);
+					break;
+				case 'checkbox':
+					$r .= sprintf('<fieldset><legend>%s</legend>%s</fieldset>',
+						$f['label'],
+						$this->renderCheckbox($f['name'], $f['value'], $f['attrs'])
+					);
 					break;
 				case 'submit':
-					$r .= $this->renderInput($f['type'], $f['name'], $f['value'], $f['attrs']);
+					$r .= sprintf('<p>%s</p>',
+						$this->renderInput($f['type'], $f['name'], $f['value'], $f['attrs'])
+					);
 					break;
 			}
 		}
 		return $r;
 	}
+
 
 	private function renderInput($type, $name, $value, $attrs) {
 		$r .= sprintf('<input type="%s" name="%s" value="%s" %s>',
@@ -109,10 +131,29 @@ class HTMLForm
 	private function renderOptions(Array $options) {
 		foreach($options as $k => $v) {
 			if (!is_array($v)) {
-				$r .= sprintf('<option value="%s">%s</opton>', $k, $v);
+				$r .= sprintf('<option value="%s">%s</option>', $k, $v);
 			}
 		}
 
+		return $r;
+	}
+
+	private function renderRadio($name, $values, $attrs) {
+		$r = '<ul>';
+		foreach($values as $k => $v) {
+			$r .= sprintf('<li><label><input type="radio" name="%s" value="%s">%s</label></li>', $name, $k, $v);
+		}
+		$r .= '</ul>';
+		return $r;
+	}
+
+	private function renderCheckbox($name, $values, $attrs) {
+		$r = '<ul>';
+
+		foreach($values as $k => $v) {
+			$r .= sprintf('<li><label><input type="checkbox" name="%s" value="%s">%s</label></li>', $name.'_'.$k, $k, $v);
+		}
+		$r .= '</ul>';
 		return $r;
 	}
 }

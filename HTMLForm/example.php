@@ -5,6 +5,20 @@ include_once('HTMLForm.php');
 $f = new HTMLForm('/foo.php', 'post', 'multipart/form-data', array('class' => 'contact_form', 'data-content' => 'lala'));
 $f->addField('Your name', 'name', 'text', '', array('id' => 'name', 'maxlenght'=>'10'));
 $f->addField('Your Email', 'email', 'text', '', array('id'=> 'email', 'maxlenght'=>'100'));
+$f->addField('Your Password', 'password', 'password', '', array('id'=> 'password', 'maxlenght'=>'64'));
+
+$values = array(
+	'mr' => 'Mister',
+	'ms' => 'Miss'
+);
+$f->addField('Title', 'title', 'radio', $values);
+
+$values = array(
+	'b' => 'Banana',
+	'o' => 'Orange',
+	'a' => 'Apple'
+);
+$f->addField('Fruit', 'fruits', 'checkbox', $values);
 
 $options = array(
 	'0' => '----',
@@ -14,29 +28,10 @@ $options = array(
 );
 
 $f->addField('Select your city', 'city', 'select', $options);
-$f->addField('Your Comment', 'description', 'textarea', 'your description here');
+$f->addField('Your Comment', 'description', 'textarea', 'your description here', array('cols' => 40, 'rows' => '10'));
 $f->addField('', 'send', 'submit', 'Send Form', array('id'=> 'send'));
 
+echo "<html><body>\n";
 echo $f->render()."\n";
-
-/* Output:
-
-<form method="post" action="/foo.php" enctype="multipart/form-data" class="contact_form" data-content="lala" >
-	<label>Your name</label>
-		<input type="text" name="name" value="" id="name" maxlenght="10" >
-	<label>Your Email</label>
-		<input type="text" name="email" value="" id="email" maxlenght="100" >
-	<label>Select your city</label>
-		<select name="city" >
-			<option value="0">----</opton>
-			<option value="1">Valdivia</opton>
-			<option value="2">Santiago</opton>
-			<option value="3">La Serena</opton>
-		</select>
-	<label>Your Comment</label>
-		<textarea name="description" >your description here</textarea>
-	<input type="submit" name="send" value="Send Form" id="send" >
-</form>
-
-*/
+echo "</body></html>\n";
 
