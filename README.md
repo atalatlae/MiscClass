@@ -1,2 +1,2 @@
 # MiscClass
-A set of different PHP classes for different purposes
+A set of PHP classes for different purposes
