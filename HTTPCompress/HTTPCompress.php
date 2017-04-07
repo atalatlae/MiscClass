@@ -1,5 +1,7 @@
 <?php
 
+namespace MiscClass\HTTPCompress;
+
 class HTTPCompress
 {
 	public function __construct() {
