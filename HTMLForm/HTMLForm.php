@@ -1,5 +1,7 @@
 <?php
 
+namespace MiscClass\HTMLForm;
+
 class HTMLForm
 {
 	private $action;
