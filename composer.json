@@ -2,6 +2,6 @@
     "name": "atalatlae/MiscClass",
     "description": "A set of PHP classes for different purposes",
     "require": {
-        "php": "^5.3.3",
+        "php": "^5.3.*"
     }
 }
