@@ -1,5 +1,7 @@
 <?php
 
+namespace MiscClass\Crypt;
+
 class Crypt
 {
 	private $_key;
