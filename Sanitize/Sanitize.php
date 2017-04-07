@@ -1,5 +1,7 @@
 <?php
 
+namespace MiscClass\Sanitize;
+
 define('FS_STRING', 1);
 define('FS_EMAIL', 2);
 define('FS_FLOAT', 3);
