@@ -2,6 +2,8 @@
 
 include_once('Crypt.php');
 
+use MiscClass\Crypt\Crypt;
+
 $key = 'super_secret_key';
 $text = 'Hello world';
 

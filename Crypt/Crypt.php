@@ -4,38 +4,35 @@ namespace MiscClass\Crypt;
 
 class Crypt
 {
-	private $_key;
-	private $_iv;
-	private $_cipher;
-	private $_ivSize;
+    private $key;
+    private $iv;
+    private $ivLen;
+    private $tag;
+    private $cipherAlg;
 
-	function __construct($key = '') {
-		$this->_key = $key;
-		$this->_cipher = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
-		$this->_ivSize = mcrypt_enc_get_iv_size($this->_cipher);
-		$tmpIV = bin2hex(mcrypt_create_iv($this->_ivSize));
-		$this->_iv = substr($tmpIV, 0, $this->_ivSize);
+    function __construct($key = '') {
+        $this->key = $key;
+        $this->cipherAlg = 'aes-128-cbc';
 
-	}
+        if (!in_array($this->cipherAlg, openssl_get_cipher_methods())) {
+            throw new Exception('Unknown cipher algorithm');
+        }
+        $this->ivLen = openssl_cipher_iv_length($this->cipherAlg);
+        $this->iv = openssl_random_pseudo_bytes($this->ivLen);
+    }
 
-	public function crypt($data) {
-		mcrypt_generic_init($this->_cipher, $this->_key, $this->_iv);
-		$result = base64_encode(mcrypt_generic($this->_cipher, $data));
-		mcrypt_generic_deinit($this->_cipher);
+    public function crypt($data) {
+        $cipherData = openssl_encrypt($data, $this->cipherAlg, $this->key, $options=0, $this->iv);
+        return base64_encode($this->iv.":".$cipherData);
+    }
 
-		return base64_encode($this->_iv.':'.$result);
-	}
+    public function decrypt($data) {
+        $raw_data = base64_decode($data;
+        $this->iv = substr($raw_data, 0, $this->ivLen);
+        $data = substr($raw_data, $this->ivLen + 1);
 
-	public function decrypt($data) {
-		$raw_data = base64_decode($data);
-		$this->_iv = substr($raw_data, 0, $this->_ivSize);
-		$data = substr($raw_data, $this->_ivSize + 1);
-
-		mcrypt_generic_init($this->_cipher, $this->_key, $this->_iv);
-		$result = mdecrypt_generic($this->_cipher, base64_decode($data));
-		mcrypt_generic_deinit($this->_cipher);
-
-		return $result;
-	}
+        $clearData = openssl_decrypt($data, $this->cipherAlg, $this->key, $options=0, $this->iv);
+        return $clearData;
+    }
 }
 
