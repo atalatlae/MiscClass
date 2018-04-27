@@ -27,7 +27,7 @@ class Crypt
     }
 
     public function decrypt($data) {
-        $raw_data = base64_decode($data;
+        $raw_data = base64_decode($data);
         $this->iv = substr($raw_data, 0, $this->ivLen);
         $data = substr($raw_data, $this->ivLen + 1);
 
