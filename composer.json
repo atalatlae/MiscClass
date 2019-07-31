@@ -6,11 +6,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MiscClass\\Crypt\\": "Crypt",
-            "MiscClass\\Sanitize\\": "Sanitize",
-            "MiscClass\\Crypt\\": "Crypt",
-            "MiscClass\\HTMLForm\\": "HTMLForm",
-            "MiscClass\\HTTPCompress\\": "HTTPCompress"
+            "MiscClass": "src"
         }
     }
 }

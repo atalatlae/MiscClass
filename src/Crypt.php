@@ -1,6 +1,6 @@
 <?php
 
-namespace MiscClass\Crypt;
+namespace MiscClass;
 
 class Crypt
 {

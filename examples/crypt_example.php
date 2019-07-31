@@ -1,8 +1,8 @@
 <?php
 
-include_once('Crypt.php');
+include_once('src/Crypt.php');
 
-use MiscClass\Crypt\Crypt;
+use MiscClass\Crypt;
 
 $key = 'super_secret_key';
 $text = 'Hello world';

@@ -1,6 +1,6 @@
 <?php
 
-namespace MiscClass\HTTPCompress;
+namespace MiscClass;
 
 class HTTPCompress
 {

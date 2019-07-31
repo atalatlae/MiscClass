@@ -1,6 +1,6 @@
 <?php
 
-namespace MiscClass\HTMLForm;
+namespace MiscClass;
 
 class HTMLForm
 {
@@ -101,7 +101,7 @@ class HTMLForm
 
 
 	private function renderInput($type, $name, $value, $attrs) {
-		$r .= sprintf('<input type="%s" name="%s" value="%s" %s>',
+		$r = sprintf('<input type="%s" name="%s" value="%s" %s>',
 			$type,
 			$name,
 			$value,
@@ -111,7 +111,7 @@ class HTMLForm
 	}
 
 	private function renderTextArea($name, $value, $attrs) {
-		$r .= sprintf('<textarea name="%s" %s>%s</textarea>',
+		$r = sprintf('<textarea name="%s" %s>%s</textarea>',
 			$name,
 			$this->renderAttrs($attrs),
 			$value
@@ -120,7 +120,7 @@ class HTMLForm
 	}
 
 	private function renderSelect($name, Array $value, $attrs) {
-		$r .= sprintf("<select name=\"%s\" %s>%s"
+		$r = sprintf("<select name=\"%s\" %s>%s"
 			.'</select>',
 			$name,
 			$this->renderAttrs($attrs),
@@ -131,6 +131,7 @@ class HTMLForm
 	}
 
 	private function renderOptions(Array $options) {
+        $r = '';
 		foreach($options as $k => $v) {
 			if (!is_array($v)) {
 				$r .= sprintf('<option value="%s">%s</option>', $k, $v);

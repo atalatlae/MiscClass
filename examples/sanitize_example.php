@@ -1,6 +1,8 @@
 <?php
 
-include_once('Sanitize.php');
+include_once('src/Sanitize.php');
+
+use MiscClass\Sanitize;
 
 $snt = new Sanitize();
 

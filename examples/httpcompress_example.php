@@ -1,6 +1,8 @@
 <?php
 
-include_once('HTTPCompress.php');
+include_once('src/HTTPCompress.php');
+
+use MiscClass\HTTPCompress;
 
 HTTPCompress::startCompress();
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace MiscClass\Sanitize;
+namespace MiscClass;
 
 define('FS_STRING', 1);
 define('FS_EMAIL', 2);

@@ -1,6 +1,8 @@
 <?php
 
-include_once('HTMLForm.php');
+include_once('src/HTMLForm.php');
+
+use MiscClass\HTMLForm;
 
 $f = new HTMLForm('/foo.php', 'post', 'multipart/form-data', array('class' => 'contact_form', 'data-content' => 'lala'));
 $f->addField('Your name', 'name', 'text', '', array('id' => 'name', 'maxlenght'=>'10'));
