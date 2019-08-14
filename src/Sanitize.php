@@ -16,7 +16,7 @@ define('FS_ARRAY_URL', 11);
 
 class Sanitize
 {
-	public function sanitizeVar($var = null, $type = "")
+	public static function clean($var = null, $type = "")
 	{
 		switch($type) {
 			case FS_STRING:
@@ -60,4 +60,3 @@ class Sanitize
 		}
 	}
 }
-
